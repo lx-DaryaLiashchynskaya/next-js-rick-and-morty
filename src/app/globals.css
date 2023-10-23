@@ -105,6 +105,15 @@ a {
   padding: 0 10px;
 }
 
+h4 {
+  font-size: 20px;
+  padding: 5px 0;
+}
+
+p {
+  padding: 3px 0;
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
@@ -117,4 +126,6 @@ main {
   justify-content: space-between;
   align-items: center;
   flex-grow: 1;
+  background-color: aliceblue;
+  padding: 20px;
 }
