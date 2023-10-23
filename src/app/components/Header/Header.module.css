@@ -5,3 +5,7 @@
     height: 80px;
     background-color: antiquewhite;
 }
+
+.navLink:hover {
+    opacity: 0.8;
+}
