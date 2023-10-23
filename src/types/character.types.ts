@@ -5,7 +5,7 @@ export interface IServerCharacter {
     species: string;
     type: string;
     gender: string;
-    id: string;
+    id: number;
     origin: {
         name: string,
         url: string,
@@ -21,6 +21,7 @@ export interface IServerCharacter {
 }
 
 export interface ICharacter {
+    id: number;
     imgSrc: string;
     name: string;
     status: string;

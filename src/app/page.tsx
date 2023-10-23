@@ -8,6 +8,7 @@ async function getCharacters() {
     return (characters.results as IServerCharacter[]).map(
         (character) => (
             {
+                id: character.id,
                 name: character.name,
                 gender: character.gender,
                 status: character.status,
@@ -22,8 +23,9 @@ export default async function Characters() {
 
   return (
       <div className={styles.charactersContainer}>
-          {characters.map(({name, gender, imgSrc, species, status}) => {
+          {characters.map(({id, name, gender, imgSrc, species, status}) => {
               return <CharacterCard
+                  id={id}
                   key={name}
                   imgSrc={imgSrc}
                   name={name}
