@@ -1,9 +1,15 @@
 .headerContainer {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     height: 80px;
     background-color: antiquewhite;
+    padding: 0 50px;
+}
+
+.linksContainer {
+    display: flex;
+    justify-content: center;
 }
 
 .navLink:hover {
