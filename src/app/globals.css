@@ -138,3 +138,9 @@ main {
   background-color: aliceblue;
   padding: 20px;
 }
+
+main > div {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}

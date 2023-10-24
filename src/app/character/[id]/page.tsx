@@ -3,6 +3,12 @@ import {ICharacter} from "@/types/character.types";
 import Image from "next/image";
 import GoBackButton from "@/app/components/GoBackButton/GoBackButton";
 
+
+export const dynamicParams = false;
+
+export async function generateStaticParams() {
+    return [{id: '1'}, {id: '2'}]
+}
 async function getCharacter(characterId: number): Promise<ICharacter> {
     const res = await fetch(`https://rickandmortyapi.com/api/character/${characterId}`)
     const character = await res.json()
