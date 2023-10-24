@@ -1,3 +1,35 @@
-export default function Locations() {
-    return <div>Locations</div>
+import styles from './page.module.css'
+import {LocationCard} from "@/app/components/LocationCard/LocationCard";
+import {ILocation, IServerLocation} from "@/types/location.types";
+
+async function getLocations() {
+    const res = await fetch('https://rickandmortyapi.com/api/location')
+    const locations = await res.json()
+    return (locations.results as IServerLocation[]).map(
+        (location) => (
+            {
+                id: location.id,
+                name: location.name,
+                type: location.type,
+                dimension: location.dimension,
+            }
+        )) as ILocation[]
+}
+
+export default async function Locations() {
+    const locations = await getLocations()
+
+    return (
+        <div className={styles.locationsContainer}>
+            {locations.map(({id, name, dimension, type}) => {
+                return <LocationCard
+                    id={id}
+                    key={name}
+                    name={name}
+                    dimension={dimension}
+                    type={type}
+                />
+            })}
+        </div>
+    )
 }
