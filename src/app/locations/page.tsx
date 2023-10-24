@@ -1,6 +1,8 @@
 import styles from './page.module.css'
 import {LocationCard} from "@/app/components/LocationCard/LocationCard";
 import {ILocation, IServerLocation} from "@/types/location.types";
+import {Suspense} from "react";
+import Loading from "@/app/locations/loading";
 
 async function getLocations() {
     const res = await fetch('https://rickandmortyapi.com/api/location')
@@ -22,13 +24,14 @@ export default async function Locations() {
     return (
         <div className={styles.locationsContainer}>
             {locations.map(({id, name, dimension, type}) => {
-                return <LocationCard
+                return <Suspense key={name} fallback={<Loading/>}>
+                    <LocationCard
                     id={id}
-                    key={name}
                     name={name}
                     dimension={dimension}
                     type={type}
                 />
+                </Suspense>
             })}
         </div>
     )

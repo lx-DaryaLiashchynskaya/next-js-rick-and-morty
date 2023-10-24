@@ -1,9 +1,8 @@
 import styles from './page.module.css'
 import GoBackButton from "@/app/components/GoBackButton/GoBackButton";
 import {ILocation} from "@/types/location.types";
-
-
-export const dynamicParams = false;
+import {Suspense} from "react";
+import Loading from "@/app/location/[id]/loading";
 
 export async function generateStaticParams() {
     return [{id: '1'}, {id: '2'}]
@@ -25,13 +24,15 @@ export default async function Location({params}: { params: { id: number } }) {
     const location = await getLocation(params.id)
 
     return (
-        <div>
-            <div className={styles.locationContainer}>
-                <h2>{location.name}</h2>
-                <p>Type: <b>{location.type}</b></p>
-                <p>Dimension: <b>{location.dimension}</b></p>
-            </div>
+        <Suspense fallback={<Loading/>}>
+            <div>
+                <div className={styles.locationContainer}>
+                    <h2>{location.name}</h2>
+                    <p>Type: <b>{location.type}</b></p>
+                    <p>Dimension: <b>{location.dimension}</b></p>
+                </div>
             <GoBackButton/>
-        </div>
+            </div>
+        </Suspense>
     )
 }
