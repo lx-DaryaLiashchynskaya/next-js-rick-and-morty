@@ -1,39 +1,20 @@
 import styles from './page.module.css'
-import {ICharacter, IServerCharacter} from "@/types/character.types";
-import {CharacterCard} from "@/app/components/CharacterCard/CharacterCard";
+import CharactersDataContainer from "@/app/components/CharactersDataContainer/CharactersDataContainer";
+import {getValidCharactersData} from "@/lib/character.utils";
 
 async function getCharacters() {
-    const res = await fetch('https://rickandmortyapi.com/api/character')
+    const res = await fetch('http://localhost:3000/api/characters')
     const characters = await res.json()
-    return (characters.results as IServerCharacter[]).map(
-        (character) => (
-            {
-                id: character.id,
-                name: character.name,
-                gender: character.gender,
-                status: character.status,
-                species: character.species,
-                imgSrc: character.image
-            }
-        )) as ICharacter[]
+
+    return getValidCharactersData(characters.charactersData.results)
 }
 
 export default async function Characters() {
     const characters = await getCharacters()
 
   return (
-      <div className={styles.charactersContainer}>
-          {characters.map(({id, name, gender, imgSrc, species, status}) => {
-              return <CharacterCard
-                  id={id}
-                  key={name}
-                  imgSrc={imgSrc}
-                  name={name}
-                  status={status}
-                  species={species}
-                  gender={gender}
-              />
-          })}
+      <div className={styles.container}>
+          <CharactersDataContainer initialData={characters}/>
       </div>
   )
 }
