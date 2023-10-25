@@ -1,4 +1,4 @@
-import styles from './page.module.css'
+import styles from './CardsContainer.module.css'
 import React from "react";
 
 export const CardsContainer = ({children}: { children: React.ReactNode }) => {
