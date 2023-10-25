@@ -3,6 +3,7 @@ import GoBackButton from "@/app/components/GoBackButton/GoBackButton";
 import {ILocation} from "@/types/location.types";
 import {Suspense} from "react";
 import Loading from "@/app/location/[id]/loading";
+import {getValidLocationData} from "@/lib/location.utils";
 
 export async function generateStaticParams() {
     return [{id: '1'}, {id: '2'}]
@@ -12,12 +13,7 @@ async function getLocation(locationId: number): Promise<ILocation> {
     const res = await fetch(`https://rickandmortyapi.com/api/location/${locationId}`)
     const location = await res.json()
 
-    return {
-        id: location.id,
-        name: location.name,
-        dimension: location.dimension,
-        type: location.type,
-    } as ILocation
+    return getValidLocationData(location)
 }
 
 export default async function Location({params}: { params: { id: number } }) {
