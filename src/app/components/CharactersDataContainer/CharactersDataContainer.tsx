@@ -2,8 +2,8 @@
 import {useEffect, useState} from "react";
 import {ICharacter} from "@/types/character.types";
 import SearchInput from "@/app/components/SearchInput/SearchInput";
-import styles from "@/app/page.module.css";
 import {CharacterCard} from "@/app/components/CharacterCard/CharacterCard";
+import {CardsContainer} from "@/app/components/CardsContainer/CardsContainer";
 
 type TData = ICharacter[]
 export default function CharactersDataContainer({initialData}: { initialData: TData }) {
@@ -15,7 +15,7 @@ export default function CharactersDataContainer({initialData}: { initialData: TD
 
     return <>
         <SearchInput setSearchResults={(searchResults: ICharacter[]) => setData(searchResults)}/>
-        <div className={styles.charactersContainer}>
+        <CardsContainer>
             {data.map(({id, name, gender, imgSrc, species, status}) => {
                 return <CharacterCard
                     id={id}
@@ -27,6 +27,6 @@ export default function CharactersDataContainer({initialData}: { initialData: TD
                     gender={gender}
                 />
             })}
-        </div>
+        </CardsContainer>
     </>
 }
