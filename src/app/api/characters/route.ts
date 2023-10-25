@@ -3,7 +3,7 @@ const getCharacters = async () => {
     return await res.json();
 }
 
-export async function GET(request: Request) {
+export async function GET() {
     const charactersData = await getCharacters()
 
     return Response.json({charactersData})
