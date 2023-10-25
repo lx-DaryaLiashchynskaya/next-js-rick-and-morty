@@ -2,6 +2,7 @@ import styles from './page.module.css'
 import {ICharacter} from "@/types/character.types";
 import Image from "next/image";
 import GoBackButton from "@/app/components/GoBackButton/GoBackButton";
+import {getValidCharacterData} from "@/lib/character.utils";
 
 
 export const dynamicParams = false;
@@ -13,14 +14,7 @@ async function getCharacter(characterId: number): Promise<ICharacter> {
     const res = await fetch(`https://rickandmortyapi.com/api/character/${characterId}`)
     const character = await res.json()
 
-    return {
-        id: character.id,
-        name: character.name,
-        gender: character.gender,
-        status: character.status,
-        species: character.species,
-        imgSrc: character.image
-    }
+    return getValidCharacterData(character)
 }
 
 export default async function Character({params}: { params: { id: number } }) {
