@@ -15,7 +15,7 @@ export default function SearchWrapper({initialData, card}: { initialData: TData,
     }, [])
 
     return <>
-        <SearchInput setSearchResults={(searchResults: ILocation[]) => setData(searchResults)}/>
+        <SearchInput setSearchResults={(searchResults: TData) => setData(searchResults)}/>
         <CardsContainer>
             {data.map((cardData) =>
                 <Suspense fallback={<Loading/>} key={cardData.name}>
