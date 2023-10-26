@@ -1,8 +1,6 @@
-import {LocationCard} from "@/app/components/LocationCard/LocationCard";
-import {Suspense} from "react";
-import Loading from "@/app/locations/loading";
 import {getValidLocationsData} from "@/lib/location.utils";
-import {CardsContainer} from "@/app/components/CardsContainer/CardsContainer";
+import LocationsDataContainer from "@/app/components/LocationsDataContainer/LocationsDataContainer";
+import styles from "@/app/page.module.css";
 
 async function getLocations() {
     const res = await fetch('http://localhost:3000/api/locations')
@@ -14,17 +12,8 @@ export default async function Locations() {
     const locations = await getLocations()
 
     return (
-        <CardsContainer>
-            {locations.map(({id, name, dimension, type}) => {
-                return <Suspense key={name} fallback={<Loading/>}>
-                    <LocationCard
-                    id={id}
-                    name={name}
-                    dimension={dimension}
-                    type={type}
-                />
-                </Suspense>
-            })}
-        </CardsContainer>
+        <div className={styles.container}>
+            <LocationsDataContainer initialData={locations}/>
+        </div>
     )
 }

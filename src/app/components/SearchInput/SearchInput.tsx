@@ -2,18 +2,20 @@ import styles from './SearchInput.module.css'
 import {useState} from "react";
 import {usePathname} from "next/navigation";
 import {ICharacter} from "@/types/character.types";
-import {getValidCharactersData} from "@/lib/character.utils";
+import {ILocation} from "@/types/location.types";
 
 const SEARCH_INPUT_PLACEHOLDER = 'Write name...'
-export default function SearchInput({setSearchResults}: { setSearchResults: (searchResults: ICharacter[]) => void }) {
+export default function SearchInput({setSearchResults}: {
+    setSearchResults: (searchResults: ICharacter[] & ILocation[]) => void
+}) {
     const [searchValue, setSearchValue] = useState('')
     const pathname = usePathname()
 
     const findCharacter = async (valueToFind: string) => {
         const res = await fetch(`/api/search${pathname}?name=${valueToFind}`)
-        const searchData = await res.json()
+        const searchData: ILocation[] & ICharacter[] = await res.json()
 
-        setSearchResults(getValidCharactersData(searchData.charactersData.results))
+        setSearchResults(searchData)
     }
 
     return <div className={styles.container}>
