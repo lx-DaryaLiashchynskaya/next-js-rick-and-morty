@@ -4,15 +4,15 @@ import {ICharacter} from "@/types/character.types";
 import Image from 'next/image'
 import Link from "next/link";
 
-export const CharacterCard = ({id, name, status, species, imgSrc, gender}: ICharacter) => {
-    return <div className={styles.characterCard}>
-        <Image className={styles.characterImage} src={imgSrc} alt={''} width={150} height={150}/>
-        <h4>{name}</h4>
-        <p>Status: <b>{status}</b></p>
-        <p>Species: <b>{species}</b></p>
-        <p>Gender: <b>{gender}</b></p>
+export const CharacterCard = ({cardData}: { cardData?: ICharacter }) => {
+    return cardData && <div className={styles.characterCard}>
+        <Image className={styles.characterImage} src={cardData.imgSrc} alt={''} width={150} height={150}/>
+        <h4>{cardData.name}</h4>
+        <p>Status: <b>{cardData.status}</b></p>
+        <p>Species: <b>{cardData.species}</b></p>
+        <p>Gender: <b>{cardData.gender}</b></p>
         <button className={styles.showMoreButton}>
-            <Link href={`/character/[id]`} as={`/character/${id}`}>Show More</Link>
+            <Link href={`/character/[id]`} as={`/character/${cardData.id}`}>Show More</Link>
         </button>
     </div>
 }

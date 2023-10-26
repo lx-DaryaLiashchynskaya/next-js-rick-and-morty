@@ -1,6 +1,7 @@
 import styles from './page.module.css'
-import CharactersDataContainer from "@/app/components/CharactersDataContainer/CharactersDataContainer";
 import {getValidCharactersData} from "@/lib/character.utils";
+import SearchWrapper from "@/app/components/SearchWrapper/SearchWrapper";
+import {CharacterCard} from "@/app/components/CharacterCard/CharacterCard";
 
 async function getCharacters() {
     const res = await fetch('http://localhost:3000/api/characters')
@@ -14,7 +15,7 @@ export default async function Characters() {
 
   return (
       <div className={styles.container}>
-          <CharactersDataContainer initialData={characters}/>
+          <SearchWrapper initialData={characters} card={<CharacterCard/>}/>
       </div>
   )
 }
