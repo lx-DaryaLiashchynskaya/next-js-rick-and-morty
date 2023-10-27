@@ -12,13 +12,13 @@ export default function SearchWrapper({initialData, card}: { initialData: TData,
 
     useEffect(() => {
         setData(initialData)
-    }, [])
+    }, [initialData])
 
     return <>
         <SearchInput setSearchResults={(searchResults: TData) => setData(searchResults)}/>
         <CardsContainer>
             {data.map((cardData) =>
-                <Suspense fallback={<Loading/>} key={cardData.name}>
+                <Suspense fallback={<Loading/>} key={cardData.name + cardData.id}>
                     {React.cloneElement(card, {cardData})}
                 </Suspense>)}
         </CardsContainer>

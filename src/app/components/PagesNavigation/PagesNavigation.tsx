@@ -1,6 +1,7 @@
 'use client'
 import React, {useEffect, useState} from 'react';
-import styles from './PagesNavigation.module.css'
+import styles from './PagesNavigation.module.css';
+import {useRouter} from "next/navigation";
 
 const FIRST_PAGE_NUMBER = 1;
 
@@ -9,10 +10,12 @@ export default function PagesNavigation({pagesAmount}: {
 }) {
     const [selectedPage, setSelectedPage] = useState(1)
     const [shownPageNumbers, setShownPageNumbers] = useState<number[]>([])
+    const router = useRouter();
 
     const pageNumbers = Array.from({length: pagesAmount}, (_, index) => index + 1)
     const onPageSelected = (selectedPage: number) => {
         setSelectedPage(selectedPage)
+        router.push(`/?page=${selectedPage}`)
     }
 
     const getIsDotsShownForStartOfPageQuery = (currentPageNumber: number) => {
@@ -59,11 +62,13 @@ export default function PagesNavigation({pagesAmount}: {
         {shownPageNumbers.map((pageNumber) => {
             return <React.Fragment key={pageNumber}>
                 {getIsDotsShownForEndOfPageQuery(pageNumber) && getDots()}
+
                 <button onClick={() => onPageSelected(pageNumber)} key={pageNumber}
                         className={`
                         ${styles.pageNumber} ${pageNumber === selectedPage ? styles.active : ''}
                         `}>
                     {pageNumber}</button>
+
                 {getIsDotsShownForStartOfPageQuery(pageNumber) && getDots()}
             </React.Fragment>
         })}

@@ -11,8 +11,8 @@ interface ICharactersInfo {
     pagesAmount: number
 }
 
-async function getCharactersInfo(): Promise<ICharactersInfo> {
-    const res = await fetch('http://localhost:3000/api/characters')
+async function getCharactersInfo(searchPage = '1'): Promise<ICharactersInfo> {
+    const res = await fetch('http://localhost:3000/api/characters?page=' + searchPage)
     const characters = await res.json()
 
     return {
@@ -21,8 +21,8 @@ async function getCharactersInfo(): Promise<ICharactersInfo> {
     }
 }
 
-export default async function Characters() {
-    const {characters, pagesAmount} = await getCharactersInfo()
+export default async function Characters({searchParams}: { searchParams: { [key: string]: string | number } }) {
+    const {characters, pagesAmount} = await getCharactersInfo(searchParams.page?.toString())
 
   return (
       <div className={styles.container}>
