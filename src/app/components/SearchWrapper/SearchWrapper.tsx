@@ -6,7 +6,7 @@ import {CardsContainer} from "@/app/components/CardsContainer/CardsContainer";
 import Loading from "@/app/locations/loading";
 import {ICharacter} from "@/types/character.types";
 
-type TData = ILocation[] | ICharacter []
+type TData = ILocation[] | ICharacter[]
 export default function SearchWrapper({initialData, card}: { initialData: TData, card: ReactElement }) {
     const [data, setData] = useState<TData>([])
 
