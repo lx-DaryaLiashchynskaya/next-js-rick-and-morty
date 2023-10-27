@@ -21,13 +21,13 @@ async function getCharactersInfo(searchPage = '1'): Promise<ICharactersInfo> {
     }
 }
 
-export default async function Characters({searchParams}: { searchParams: { [key: string]: string | number } }) {
-    const {characters, pagesAmount} = await getCharactersInfo(searchParams.page?.toString())
+export default async function Characters({searchParams}: { searchParams: { [key: string]: string } }) {
+    const {characters, pagesAmount} = await getCharactersInfo(searchParams.page)
 
   return (
       <div className={styles.container}>
           <SearchWrapper initialData={characters} card={<CharacterCard/>}/>
-          <PagesNavigation pagesAmount={pagesAmount}/>
+          <PagesNavigation pathname={'/'} pagesAmount={pagesAmount}/>
       </div>
   )
 }

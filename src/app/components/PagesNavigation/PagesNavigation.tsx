@@ -5,8 +5,9 @@ import {useRouter} from "next/navigation";
 
 const FIRST_PAGE_NUMBER = 1;
 
-export default function PagesNavigation({pagesAmount}: {
-    pagesAmount: number
+export default function PagesNavigation({pagesAmount, pathname}: {
+    pagesAmount: number,
+    pathname: string
 }) {
     const [selectedPage, setSelectedPage] = useState(1)
     const [shownPageNumbers, setShownPageNumbers] = useState<number[]>([])
@@ -15,7 +16,7 @@ export default function PagesNavigation({pagesAmount}: {
     const pageNumbers = Array.from({length: pagesAmount}, (_, index) => index + 1)
     const onPageSelected = (selectedPage: number) => {
         setSelectedPage(selectedPage)
-        router.push(`/?page=${selectedPage}`)
+        router.push(`${pathname}?page=${selectedPage}`)
     }
 
     const getIsDotsShownForStartOfPageQuery = (currentPageNumber: number) => {
