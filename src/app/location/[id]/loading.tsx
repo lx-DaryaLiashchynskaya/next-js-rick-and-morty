@@ -1,7 +1,7 @@
+import {Spinner} from "@/app/components/Spinner/Spinner";
+
 export default function Loading() {
     return (
-        <div style={{justifyContent: 'center'}}>
-            <p>Loading location...</p>
-        </div>
+        <Spinner/>
     )
 }
