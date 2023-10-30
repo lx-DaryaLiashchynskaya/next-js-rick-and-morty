@@ -14,6 +14,7 @@ export const getValidCharacterData = (character: IServerCharacter): ICharacter =
         gender: character.gender,
         status: character.status,
         species: character.species,
-        imgSrc: character.image
+        imgSrc: character.image,
+        location: character.location
     }
 }

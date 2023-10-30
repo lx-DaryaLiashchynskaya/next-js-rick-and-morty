@@ -27,4 +27,8 @@ export interface ICharacter {
     status: string;
     species: string;
     gender: string;
+    location: {
+        name: string,
+        url: string
+    },
 }

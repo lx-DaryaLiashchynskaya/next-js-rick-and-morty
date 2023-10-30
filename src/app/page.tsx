@@ -21,7 +21,7 @@ async function getCharactersInfo(searchPage = '1'): Promise<ICharactersInfo> {
     }
 }
 
-export default async function Characters({searchParams}: { searchParams: { [key: string]: string } }) {
+export default async function Characters({searchParams}: { searchParams: { page: string } }) {
     const {characters, pagesAmount} = await getCharactersInfo(searchParams.page)
 
   return (

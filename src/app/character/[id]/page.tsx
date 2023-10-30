@@ -28,6 +28,7 @@ export default async function Character({params}: { params: { id: number } }) {
                 <p>Status: <b>{character.status}</b></p>
                 <p>Species: <b>{character.species}</b></p>
                 <p>Gender: <b>{character.gender}</b></p>
+                <p>Location: <b>{character.location.name}</b></p>
             </div>
             <GoBackButton/>
         </div>
