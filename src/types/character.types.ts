@@ -29,6 +29,7 @@ export interface ICharacter {
     gender: string;
     location: {
         name: string,
-        url: string
+        url: string,
+        id: string
     },
 }

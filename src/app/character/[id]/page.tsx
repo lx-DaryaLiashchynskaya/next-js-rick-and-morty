@@ -3,6 +3,7 @@ import {ICharacter} from "@/types/character.types";
 import Image from "next/image";
 import GoBackButton from "@/app/components/GoBackButton/GoBackButton";
 import {getValidCharacterData} from "@/lib/character.utils";
+import Link from "next/link";
 
 
 export const dynamicParams = false;
@@ -28,7 +29,12 @@ export default async function Character({params}: { params: { id: number } }) {
                 <p>Status: <b>{character.status}</b></p>
                 <p>Species: <b>{character.species}</b></p>
                 <p>Gender: <b>{character.gender}</b></p>
-                <p>Location: <b>{character.location.name}</b></p>
+                <p>Location:
+                    <b><Link className={styles.locationLink} href={'/location/[id]'}
+                             as={`/location/${character.location.id}`}>
+                        {character.location.name}
+                    </Link></b>
+                </p>
             </div>
             <GoBackButton/>
         </div>
