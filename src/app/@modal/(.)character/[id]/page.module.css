@@ -1,0 +1,11 @@
+.characterImage {
+    border-radius: 50%;
+}
+
+.locationLink {
+    color: darkgoldenrod;
+}
+
+.locationLink:hover {
+    opacity: 0.7;
+}
