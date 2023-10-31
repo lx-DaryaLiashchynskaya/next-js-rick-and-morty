@@ -1,10 +1,10 @@
 import styles from './page.module.css'
 import {getValidCharactersData} from "@/lib/character.utils";
-import SearchWrapper from "@/app/components/SearchWrapper/SearchWrapper";
-import {CharacterCard} from "@/app/components/CharacterCard/CharacterCard";
 import {ICharacter} from "@/types/character.types";
 import React from "react";
-import PagesNavigation from "@/app/components/PagesNavigation/PagesNavigation";
+import SearchWrapper from "@/components/SearchWrapper/SearchWrapper";
+import PagesNavigation from "@/components/PagesNavigation/PagesNavigation";
+import {CharacterCard} from "@/components/CharacterCard/CharacterCard";
 
 interface ICharactersInfo {
     characters: ICharacter[],
@@ -24,10 +24,10 @@ async function getCharactersInfo(searchPage = '1'): Promise<ICharactersInfo> {
 export default async function Characters({searchParams}: { searchParams: { page: string } }) {
     const {characters, pagesAmount} = await getCharactersInfo(searchParams.page)
 
-  return (
-      <div className={styles.container}>
-          <SearchWrapper initialData={characters} card={<CharacterCard/>}/>
-          <PagesNavigation pathname={'/'} pagesAmount={pagesAmount}/>
-      </div>
-  )
+    return (
+        <div className={styles.container}>
+            <SearchWrapper initialData={characters} card={<CharacterCard/>}/>
+            <PagesNavigation pathname={'/'} pagesAmount={pagesAmount}/>
+        </div>
+    )
 }
