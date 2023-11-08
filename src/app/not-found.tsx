@@ -1,5 +1,5 @@
 import styles from './not-found.module.css'
-import GoBackButton from "@/components/GoBackButton/GoBackButton";
+import GoBackButton from "@/app/components/GoBackButton/GoBackButton";
 
 
 export default function NotFound() {

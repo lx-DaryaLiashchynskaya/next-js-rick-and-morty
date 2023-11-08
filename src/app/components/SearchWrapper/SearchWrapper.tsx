@@ -1,8 +1,8 @@
 'use client'
 import React, {ReactElement, useEffect, useState} from "react";
-import SearchInput from "@/components/SearchInput/SearchInput";
+import SearchInput from "@/app/components/SearchInput/SearchInput";
 import {ILocation} from "@/types/location.types";
-import {CardsContainer} from "@/components/CardsContainer/CardsContainer";
+import {CardsContainer} from "@/app/components/CardsContainer/CardsContainer";
 import {ICharacter} from "@/types/character.types";
 
 type TData = ILocation[] | ICharacter[]
