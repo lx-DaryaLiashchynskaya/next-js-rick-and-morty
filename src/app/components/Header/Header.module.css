@@ -15,3 +15,28 @@
 .navLink:hover {
     opacity: 0.8;
 }
+
+.authContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.authContainer a {
+    padding: 0;
+}
+
+.authButton {
+    margin: 5px 0;
+    border-radius: 20px;
+    background-color: aliceblue;
+    border: none;
+    width: 100px;
+    height: 30px;
+    cursor: pointer
+}
+
+.authButton:hover {
+    opacity: 0.8;
+}

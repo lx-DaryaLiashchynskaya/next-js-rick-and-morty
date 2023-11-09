@@ -5,9 +5,7 @@ import {Footer} from "@/app/components/Footer/Footer";
 import {Header} from "@/app/components/Header/Header";
 import React from "react";
 import {INavigationLink} from "@/types/navigationLinks.types";
-import {SessionProvider} from "next-auth/react";
-import {getServerSession} from "next-auth";
-import {authOptions} from "@/app/api/auth/route";
+import NextAuthProvider from "@/app/components/NextAuthProvider/NextAuthProvider";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -29,19 +27,17 @@ interface LayoutProps {
 export default async function RootLayout({
                                              children, modal
                                          }: LayoutProps) {
-    const session = await getServerSession(authOptions)
-
   return (
       <html lang="en">
       <body className={inter.className}>
-      <SessionProvider session={session}>
+      <NextAuthProvider>
           <Header navigationLinks={NAVIGATION_LINKS}/>
           <main>
               {children}
           </main>
           {modal}
           <Footer/>
-      </SessionProvider>
+      </NextAuthProvider>
       </body>
     </html>
   )

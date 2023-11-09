@@ -1,6 +1,8 @@
 import {ILocation} from "@/types/location.types";
 import {getValidLocationData} from "@/lib/location.utils";
 import {ModalComponent} from "@/app/components/Modal/Modal";
+import {getServerSession} from "next-auth";
+import {authOptions} from "@/app/api/auth/[...nextauth]/route";
 
 export const dynamicParams = false
 
@@ -17,12 +19,17 @@ async function getLocation(locationId: number): Promise<ILocation> {
 
 export default async function LocationModal({params}: { params: { id: number } }) {
     const location = await getLocation(params.id)
+    const session = await getServerSession(authOptions);
 
     return (
         <ModalComponent>
-            <h2>{location.name}</h2>
-            <p>Type: <b>{location.type}</b></p>
-            <p>Dimension: <b>{location.dimension}</b></p>
+            {session && session.user ?
+                (<>
+                    <h2>{location.name}</h2>
+                    <p>Type: <b>{location.type}</b></p>
+                    <p>Dimension: <b>{location.dimension}</b></p>
+                </>) :
+                <p>You cannot read additional info until your do not have register on site</p>}
         </ModalComponent>
     )
 }

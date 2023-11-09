@@ -3,6 +3,8 @@ import {ICharacter} from "@/types/character.types";
 import Image from "next/image";
 import {getValidCharacterData} from "@/lib/character.utils";
 import {ModalComponent} from "@/app/components/Modal/Modal";
+import {getServerSession} from "next-auth";
+import {authOptions} from "@/app/api/auth/[...nextauth]/route";
 
 export const dynamicParams = false
 
@@ -19,17 +21,22 @@ async function getCharacter(characterId: number): Promise<ICharacter> {
 
 export default async function ModalCharacter({params}: { params: { id: number } }) {
     const character = await getCharacter(params.id)
+    const session = await getServerSession(authOptions);
 
     return (
         <ModalComponent>
-            <Image className={styles.characterImage} src={character.imgSrc} alt={''} width={350} height={350}/>
-            <h2>{character.name}</h2>
-            <p>Status: <b>{character.status}</b></p>
-            <p>Species: <b>{character.species}</b></p>
-            <p>Gender: <b>{character.gender}</b></p>
-            <p>Location:
-                <b>{character.location.name}</b>
-            </p>
+            {session && session.user ?
+                (<>
+                    <Image className={styles.characterImage} src={character.imgSrc} alt={''} width={350} height={350}/>
+                    <h2>{character.name}</h2>
+                    <p>Status: <b>{character.status}</b></p>
+                    <p>Species: <b>{character.species}</b></p>
+                    <p>Gender: <b>{character.gender}</b></p>
+                    <p>Location:
+                        <b>{character.location.name}</b>
+                    </p>
+                </>) :
+                <p>You cannot read additional info until your do not have register on site</p>}
         </ModalComponent>
     )
 }
