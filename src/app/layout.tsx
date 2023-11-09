@@ -5,6 +5,9 @@ import {Footer} from "@/app/components/Footer/Footer";
 import {Header} from "@/app/components/Header/Header";
 import React from "react";
 import {INavigationLink} from "@/types/navigationLinks.types";
+import {SessionProvider} from "next-auth/react";
+import {getServerSession} from "next-auth";
+import {authOptions} from "@/app/api/auth/route";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -18,22 +21,27 @@ const NAVIGATION_LINKS: INavigationLink[] = [
     {title: "Locations", link: '/locations'}
 ]
 
-export default function RootLayout({
-  children,
-                                       modal
-}: {
+interface LayoutProps {
     children: React.ReactNode,
-    modal: React.ReactNode
-}) {
+    modal: React.ReactNode,
+}
+
+export default async function RootLayout({
+                                             children, modal
+                                         }: LayoutProps) {
+    const session = await getServerSession(authOptions)
+
   return (
       <html lang="en">
       <body className={inter.className}>
-      <Header navigationLinks={NAVIGATION_LINKS}/>
-      <main>
-          {children}
-      </main>
-      {modal}
-      <Footer/>
+      <SessionProvider session={session}>
+          <Header navigationLinks={NAVIGATION_LINKS}/>
+          <main>
+              {children}
+          </main>
+          {modal}
+          <Footer/>
+      </SessionProvider>
       </body>
     </html>
   )
