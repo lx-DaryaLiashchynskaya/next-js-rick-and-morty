@@ -15,7 +15,7 @@ async function getLocations(searchPage = '1') {
     }
 }
 
-export default async function Locations({searchParams}: { searchParams: { [key: string]: string } }) {
+export default async function Locations({searchParams}: { searchParams: { page: string } }) {
     const {locations, pagesAmount} = await getLocations(searchParams.page)
 
     return (
