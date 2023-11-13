@@ -1,4 +1,4 @@
-import {Spinner} from "@/app/components/Spinner/Spinner";
+import {Spinner} from "@/components/Spinner/Spinner";
 
 export default function Loading() {
     return (

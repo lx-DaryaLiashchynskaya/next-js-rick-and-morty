@@ -2,9 +2,9 @@ import styles from './page.module.css'
 import {ICharacter} from "@/types/character.types";
 import Image from "next/image";
 import {getValidCharacterData} from "@/lib/character.utils";
-import {ModalComponent} from "@/app/components/Modal/Modal";
 import {getServerSession} from "next-auth";
 import {authOptions} from "@/app/api/auth/[...nextauth]/route";
+import {ModalComponent} from "@/components/Modal/Modal";
 
 export const dynamicParams = false
 

@@ -1,8 +1,8 @@
 import {ILocation} from "@/types/location.types";
 import {getValidLocationData} from "@/lib/location.utils";
-import {ModalComponent} from "@/app/components/Modal/Modal";
 import {getServerSession} from "next-auth";
 import {authOptions} from "@/app/api/auth/[...nextauth]/route";
+import {ModalComponent} from "@/components/Modal/Modal";
 
 export const dynamicParams = false
 

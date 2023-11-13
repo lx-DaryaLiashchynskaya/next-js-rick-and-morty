@@ -1,10 +1,10 @@
 import styles from './page.module.css'
 import {getValidCharactersData} from "@/lib/character.utils";
-import SearchWrapper from "@/app/components/SearchWrapper/SearchWrapper";
-import {CharacterCard} from "@/app/components/CharacterCard/CharacterCard";
 import {ICharacter} from "@/types/character.types";
 import React from "react";
-import PagesNavigation from "@/app/components/PagesNavigation/PagesNavigation";
+import SearchWrapper from "@/components/SearchWrapper/SearchWrapper";
+import {CharacterCard} from "@/components/CharacterCard/CharacterCard";
+import PagesNavigation from "@/components/PagesNavigation/PagesNavigation";
 
 interface ICharactersInfo {
     characters: ICharacter[],

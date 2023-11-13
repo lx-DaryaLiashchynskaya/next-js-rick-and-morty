@@ -1,11 +1,11 @@
 import type {Metadata} from 'next'
 import {Inter} from 'next/font/google'
 import './globals.css'
-import {Footer} from "@/app/components/Footer/Footer";
-import {Header} from "@/app/components/Header/Header";
 import React from "react";
 import {INavigationLink} from "@/types/navigationLinks.types";
-import NextAuthProvider from "@/app/components/NextAuthProvider/NextAuthProvider";
+import NextAuthProvider from "@/components/NextAuthProvider/NextAuthProvider";
+import {Header} from "@/components/Header/Header";
+import {Footer} from "@/components/Footer/Footer";
 
 const inter = Inter({ subsets: ['latin'] })
 

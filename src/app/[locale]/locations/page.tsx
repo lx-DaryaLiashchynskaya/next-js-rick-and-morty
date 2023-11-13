@@ -1,9 +1,9 @@
 import {getValidLocationsData} from "@/lib/location.utils";
 import styles from "@/app/page.module.css";
-import {LocationCard} from "@/app/components/LocationCard/LocationCard";
-import SearchWrapper from "@/app/components/SearchWrapper/SearchWrapper";
-import PagesNavigation from "@/app/components/PagesNavigation/PagesNavigation";
 import React from "react";
+import SearchWrapper from "@/components/SearchWrapper/SearchWrapper";
+import {LocationCard} from "@/components/LocationCard/LocationCard";
+import PagesNavigation from "@/components/PagesNavigation/PagesNavigation";
 
 async function getLocations(searchPage = '1') {
     const res = await fetch('http://localhost:3000/api/locations?page=' + searchPage)
