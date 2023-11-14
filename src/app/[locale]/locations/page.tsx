@@ -1,5 +1,5 @@
 import {getValidLocationsData} from "@/lib/location.utils";
-import styles from "@/app/page.module.css";
+import styles from "@/app/[locale]/page.module.css";
 import React from "react";
 import SearchWrapper from "@/components/SearchWrapper/SearchWrapper";
 import {LocationCard} from "@/components/LocationCard/LocationCard";

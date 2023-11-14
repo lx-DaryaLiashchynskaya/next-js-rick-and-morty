@@ -3,16 +3,32 @@ import styles from './Header.module.css'
 import Link from "next/link";
 import {INavigationLink} from "@/types/navigationLinks.types";
 import {useSession} from "next-auth/react";
+import {useParams, useRouter, useSelectedLayoutSegments} from "next/navigation";
+import React from "react";
 
 export const Header = ({navigationLinks}: { navigationLinks: INavigationLink[] }) => {
     const session = useSession()
+    const locale = useParams()?.locale;
+    const router = useRouter();
+    const urlSegments = useSelectedLayoutSegments();
+
+    const handleLocaleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        const newLocale = event.target.value;
+
+        router.push(`/${newLocale}/${urlSegments.join('/')}`);
+    }
 
     return <header className={styles.headerContainer}>
         <div className={styles.linksContainer}>
             {navigationLinks.map((link) => (
-                <Link key={link.title} className={styles.navLink} href={link.link}>{link.title}</Link>)
+                <Link key={link.title} className={styles.navLink}
+                      href={`/${locale}${link.link}`}>{link.title}</Link>)
             )}
         </div>
+        <select className={styles.select} onChange={handleLocaleChange} value={locale}>
+            <option value="en">English</option>
+            <option value="fr">French</option>
+        </select>
         {session.status === 'authenticated' ?
             <div className={styles.authContainer}>
                 <p>Hello, <b>{session.data.user?.name}</b></p>
