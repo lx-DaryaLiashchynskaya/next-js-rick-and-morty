@@ -1,10 +1,12 @@
 import {NextRequest, NextResponse} from 'next/server';
 
 import {fallbackLng, locales, LocaleTypes} from "../i18n/settings";
+import {joinSearchParamsString} from "@/lib/url.utils";
 
 export function middleware(request: NextRequest) {
     // Check if there is any supported locale in the pathname
-    const pathname = request.nextUrl.pathname;
+    const searchString = request.nextUrl.searchParams.size ? `?${joinSearchParamsString(request.nextUrl.searchParams)}` : ''
+    const pathname = `${request.nextUrl.pathname}${searchString}`;
 
     // Check if the default locale is in the pathname
     if (
@@ -31,7 +33,6 @@ export function middleware(request: NextRequest) {
     if (pathnameIsMissingLocale) {
         // We are on the default locale
         // Rewrite so Next.js understands
-
         // e.g. incoming request is /about
         // Tell Next.js it should pretend it's /en/about
         return NextResponse.rewrite(

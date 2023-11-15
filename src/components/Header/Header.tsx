@@ -3,19 +3,21 @@ import styles from './Header.module.css'
 import Link from "next/link";
 import {INavigationLink} from "@/types/navigationLinks.types";
 import {useSession} from "next-auth/react";
-import {useParams, useRouter, useSelectedLayoutSegments} from "next/navigation";
+import {useParams, useRouter, useSearchParams, useSelectedLayoutSegments} from "next/navigation";
 import React from "react";
+import {joinSearchParamsString} from "@/lib/url.utils";
 
 export const Header = ({navigationLinks}: { navigationLinks: INavigationLink[] }) => {
     const session = useSession()
     const locale = useParams()?.locale;
     const router = useRouter();
     const urlSegments = useSelectedLayoutSegments();
+    const searchParams = useSearchParams()
 
     const handleLocaleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const newLocale = event.target.value;
 
-        router.push(`/${newLocale}/${urlSegments.join('/')}`);
+        router.push(`/${newLocale}/${urlSegments.join('/')}?${joinSearchParamsString(searchParams)}`);
     }
 
     return <header className={styles.headerContainer}>

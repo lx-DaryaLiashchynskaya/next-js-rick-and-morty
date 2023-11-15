@@ -5,6 +5,7 @@ import {ICharacter} from "@/types/character.types";
 import {ILocation} from "@/types/location.types";
 import {useTranslation} from "../../../i18n/client";
 import {LocaleTypes} from "../../../i18n/settings";
+import {deleteLocaleFromURL} from "@/lib/url.utils";
 
 export default function SearchInput({setSearchResults}: {
     setSearchResults: (searchResults: ICharacter[] & ILocation[]) => void
@@ -15,7 +16,7 @@ export default function SearchInput({setSearchResults}: {
     const {t} = useTranslation(locale, 'home');
 
     const findCharacter = async (valueToFind: string) => {
-        const res = await fetch(`/api/search${pathname}?name=${valueToFind}`)
+        const res = await fetch(`/api/search${deleteLocaleFromURL(pathname)}?name=${valueToFind}`)
         const searchData: ILocation[] & ICharacter[] = await res.json()
 
         setSearchResults(searchData)
