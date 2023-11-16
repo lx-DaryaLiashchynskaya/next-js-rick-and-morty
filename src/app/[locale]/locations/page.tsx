@@ -5,8 +5,8 @@ import SearchWrapper from "@/components/SearchWrapper/SearchWrapper";
 import {LocationCard} from "@/components/LocationCard/LocationCard";
 import PagesNavigation from "@/components/PagesNavigation/PagesNavigation";
 
-async function getLocations(searchPage = '1') {
-    const res = await fetch('http://localhost:3000/api/locations?page=' + searchPage)
+async function getLocations(searchPage = '1', searchName = '') {
+    const res = await fetch(`http://localhost:3000/api/locations?page=${searchPage}&name=${searchName}`, {cache: 'no-store'})
     const locations = await res.json()
 
     return {
@@ -15,8 +15,8 @@ async function getLocations(searchPage = '1') {
     }
 }
 
-export default async function Locations({searchParams}: { searchParams: { page: string } }) {
-    const {locations, pagesAmount} = await getLocations(searchParams.page)
+export default async function Locations({searchParams}: { searchParams: { page: string, name: string } }) {
+    const {locations, pagesAmount} = await getLocations(searchParams.page, searchParams.name)
 
     return (
         <div className={styles.container}>

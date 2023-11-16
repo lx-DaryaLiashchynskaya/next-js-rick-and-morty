@@ -19,7 +19,7 @@ export function middleware(request: NextRequest) {
             new URL(
                 pathname.replace(
                     `/${fallbackLng}`,
-                    '/',
+                    pathname === `/${fallbackLng}` ? '/' : '',
                 ),
                 request.url,
             ),

@@ -32,7 +32,7 @@ export default function PagesNavigation({pagesAmount, pathname}: {
     const onPageSelected = (selectedPage: number) => {
         setSelectedPage(selectedPage)
         const searchName = searchParams.get('name')
-        router.push(`${locale}${pathname}?page=${selectedPage}${searchName ? `&name=${searchName}` : ''}`)
+        router.push(`/${locale}${pathname}?page=${selectedPage}${searchName ? `&name=${searchName}` : ''}`)
     }
 
     const getIsDotsShownForStartOfPageQuery = (currentPageNumber: number) => {
