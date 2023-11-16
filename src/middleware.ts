@@ -1,6 +1,6 @@
 import {NextRequest, NextResponse} from 'next/server';
 
-import {fallbackLng, locales, LocaleTypes} from "../i18n/settings";
+import {fallbackLng, locales} from "../i18n/settings";
 import {joinSearchParamsString} from "@/lib/url.utils";
 
 export function middleware(request: NextRequest) {
@@ -10,7 +10,7 @@ export function middleware(request: NextRequest) {
 
     // Check if the default locale is in the pathname
     if (
-        pathname.startsWith(`/${fallbackLng}/`) ||
+        pathname.startsWith(`/${fallbackLng}`) ||
         pathname === `/${fallbackLng}`
     ) {
         // e.g. incoming request is /en/about
@@ -19,7 +19,7 @@ export function middleware(request: NextRequest) {
             new URL(
                 pathname.replace(
                     `/${fallbackLng}`,
-                    pathname === `/${fallbackLng}` ? '/' : '',
+                    '/',
                 ),
                 request.url,
             ),
@@ -27,7 +27,7 @@ export function middleware(request: NextRequest) {
     }
 
     const pathnameIsMissingLocale = locales.every(
-        (locale: LocaleTypes) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`,
+        (locale: string) => !pathname.startsWith(`/${locale}`),
     );
 
     if (pathnameIsMissingLocale) {

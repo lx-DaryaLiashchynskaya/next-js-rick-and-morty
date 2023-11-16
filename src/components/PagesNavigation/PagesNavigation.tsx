@@ -1,7 +1,8 @@
 'use client'
 import React, {useEffect, useState} from 'react';
 import styles from './PagesNavigation.module.css';
-import {useRouter} from "next/navigation";
+import {useParams, useRouter, useSearchParams} from "next/navigation";
+import {getPageNumbersArray} from "@/lib/pageNavigation.utils";
 
 const FIRST_PAGE_NUMBER = 1;
 
@@ -9,14 +10,29 @@ export default function PagesNavigation({pagesAmount, pathname}: {
     pagesAmount: number,
     pathname: string
 }) {
-    const [selectedPage, setSelectedPage] = useState(1)
+    const searchParams = useSearchParams()
+    const searchParamsSelectedPage = Number(searchParams.get('page'))
+    const [selectedPage, setSelectedPage] = useState<number>(searchParamsSelectedPage || FIRST_PAGE_NUMBER)
     const [shownPageNumbers, setShownPageNumbers] = useState<number[]>([])
     const router = useRouter();
+    const locale = useParams()?.locale;
+    const [pageNumbers, setPageNumbers] = useState(getPageNumbersArray(pagesAmount))
 
-    const pageNumbers = Array.from({length: pagesAmount}, (_, index) => index + 1)
+    useEffect(() => {
+        setPageNumbers(getPageNumbersArray(pagesAmount))
+    }, [pagesAmount]);
+
+    useEffect(() => {
+            if (searchParamsSelectedPage === 0) {
+                setSelectedPage(FIRST_PAGE_NUMBER)
+            }
+        }, [searchParamsSelectedPage]
+    )
+
     const onPageSelected = (selectedPage: number) => {
         setSelectedPage(selectedPage)
-        router.push(`${pathname}?page=${selectedPage}`)
+        const searchName = searchParams.get('name')
+        router.push(`${locale}${pathname}?page=${selectedPage}${searchName ? `&name=${searchName}` : ''}`)
     }
 
     const getIsDotsShownForStartOfPageQuery = (currentPageNumber: number) => {
@@ -57,7 +73,7 @@ export default function PagesNavigation({pagesAmount, pathname}: {
         }, [] as number[])
 
         setShownPageNumbers(getShownPages)
-    }, [selectedPage])
+    }, [selectedPage, pageNumbers])
 
     return <div className={styles.container}>
         {shownPageNumbers.map((pageNumber) => {

@@ -11,7 +11,10 @@ export const deleteLocaleFromURL = (url: string) => {
 }
 
 export const joinSearchParamsString = (searchParams: URLSearchParams) => {
+    if (searchParams.size === 0) return '';
+
     const joinedSearchParams: string[] = []
+
     searchParams.forEach((value, key) => {
         joinedSearchParams.push(`${key}=${value}`)
     })

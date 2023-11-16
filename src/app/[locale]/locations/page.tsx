@@ -20,7 +20,7 @@ export default async function Locations({searchParams}: { searchParams: { page: 
 
     return (
         <div className={styles.container}>
-            <SearchWrapper initialData={locations} card={<LocationCard/>}/>
+            <SearchWrapper data={locations || []} card={<LocationCard/>}/>
             <PagesNavigation pathname={'/locations'} pagesAmount={pagesAmount}/>
         </div>
     )

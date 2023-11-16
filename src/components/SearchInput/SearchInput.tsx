@@ -1,25 +1,18 @@
 import styles from './SearchInput.module.css'
 import {useState} from "react";
-import {useParams, usePathname} from "next/navigation";
-import {ICharacter} from "@/types/character.types";
-import {ILocation} from "@/types/location.types";
+import {useParams, usePathname, useRouter} from "next/navigation";
 import {useTranslation} from "../../../i18n/client";
 import {LocaleTypes} from "../../../i18n/settings";
-import {deleteLocaleFromURL} from "@/lib/url.utils";
 
-export default function SearchInput({setSearchResults}: {
-    setSearchResults: (searchResults: ICharacter[] & ILocation[]) => void
-}) {
+export default function SearchInput() {
     const [searchValue, setSearchValue] = useState('')
     const pathname = usePathname()
     const locale = useParams()?.locale as LocaleTypes;
     const {t} = useTranslation(locale, 'home');
+    const router = useRouter();
 
     const findCharacter = async (valueToFind: string) => {
-        const res = await fetch(`/api/search${deleteLocaleFromURL(pathname)}?name=${valueToFind}`)
-        const searchData: ILocation[] & ICharacter[] = await res.json()
-
-        setSearchResults(searchData)
+        router.replace(`${pathname}?name=${valueToFind}`)
     }
 
     return <div className={styles.container}>

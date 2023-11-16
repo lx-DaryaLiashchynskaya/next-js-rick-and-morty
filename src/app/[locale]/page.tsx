@@ -11,8 +11,8 @@ interface ICharactersInfo {
     pagesAmount: number
 }
 
-async function getCharactersInfo(searchPage = '1'): Promise<ICharactersInfo> {
-    const res = await fetch('http://localhost:3000/api/characters?page=' + searchPage)
+async function getCharactersInfo(searchPage = '1', searchName = ''): Promise<ICharactersInfo> {
+    const res = await fetch(`http://localhost:3000/api/characters?page=${searchPage}&name=${searchName}`, {cache: 'no-store'})
     const characters = await res.json()
 
     return {
@@ -21,12 +21,15 @@ async function getCharactersInfo(searchPage = '1'): Promise<ICharactersInfo> {
     }
 }
 
-export default async function Characters({searchParams}: { searchParams: { page: string } }) {
-    const {characters, pagesAmount} = await getCharactersInfo(searchParams.page)
+export default async function Characters({searchParams, params}: {
+    params: { locale: string },
+    searchParams: { page: string, name: string }
+}) {
+    const {characters, pagesAmount} = await getCharactersInfo(searchParams.page, searchParams.name)
 
     return (
         <div className={styles.container}>
-            <SearchWrapper initialData={characters} card={<CharacterCard/>}/>
+            <SearchWrapper data={characters || []} card={<CharacterCard/>}/>
             <PagesNavigation pathname={'/'} pagesAmount={pagesAmount}/>
         </div>
     )
