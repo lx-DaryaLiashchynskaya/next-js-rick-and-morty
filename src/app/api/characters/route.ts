@@ -1,3 +1,5 @@
+import {joinSearchParamsString} from "@/lib/url.utils";
+
 const getCharacters = async (searchParams: string) => {
     const res = await fetch(`https://rickandmortyapi.com/api/character?${searchParams}`)
     return await res.json();
@@ -5,8 +7,8 @@ const getCharacters = async (searchParams: string) => {
 
 export async function GET(request: Request) {
     const {searchParams} = new URL(request.url)
-    const searchPageNumber = searchParams.get('page')
-    const charactersData = await getCharacters(`page=${searchPageNumber}`)
+    const searchString = joinSearchParamsString(searchParams)
+    const charactersData = await getCharacters(searchString)
 
     return Response.json({charactersData})
 }

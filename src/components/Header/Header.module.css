@@ -1,0 +1,97 @@
+.headerContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+    background-color: antiquewhite;
+    padding: 0 50px;
+}
+
+.linksContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.navLink:hover {
+    opacity: 0.8;
+}
+
+.authContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.authContainer a {
+    padding: 0;
+}
+
+.authButton {
+    margin: 5px 0;
+    border-radius: 20px;
+    background-color: aliceblue;
+    border: none;
+    width: 100px;
+    height: 30px;
+    cursor: pointer
+}
+
+.authButton:hover {
+    opacity: 0.8;
+}
+
+.select {
+    /* styling */
+    background-color: white;
+    border: thin solid tan;
+    border-radius: 4px;
+    display: inline-block;
+    font: inherit;
+    line-height: 1.5em;
+    padding: 5px 70px 5px 15px;
+
+    /* reset */
+
+    margin: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.select.minimal {
+    background-image: linear-gradient(45deg, transparent 50%, grey 50%),
+    linear-gradient(135deg, grey 50%, transparent 50%),
+    linear-gradient(to right, #ccc, #ccc);
+    background-position: calc(100% - 20px) calc(1em + 2px),
+    calc(100% - 15px) calc(1em + 2px),
+    calc(100% - 2.5em) 0.5em;
+    background-size: 5px 5px,
+    5px 5px,
+    1px 1.5em;
+    background-repeat: no-repeat;
+}
+
+.select.minimal:focus {
+    background-image: linear-gradient(45deg, antiquewhite 50%, transparent 50%),
+    linear-gradient(135deg, antiquewhite 50%, antiquewhite 50%),
+    linear-gradient(to right, #ccc, #ccc);
+    background-position: calc(100% - 15px) 1em,
+    calc(100% - 20px) 1em,
+    calc(100% - 2.5em) 0.5em;
+    background-size: 5px 5px,
+    5px 5px,
+    1px 1.5em;
+    background-repeat: no-repeat;
+    border-color: tan;
+    outline: 0;
+}
+
+
+.select:-moz-focusring {
+    color: transparent;
+    text-shadow: 0 0 0 #000;
+}
+
