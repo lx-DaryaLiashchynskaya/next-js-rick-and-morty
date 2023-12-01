@@ -17,14 +17,13 @@ interface LayoutProps {
 }
 
 export default async function RootLayout({
-                                             children, modal
+                                             children
                                          }: LayoutProps) {
   return (
       <html lang="en">
       <body className={inter.className}>
       <NextAuthProvider>
               {children}
-          {modal}
       </NextAuthProvider>
       </body>
     </html>

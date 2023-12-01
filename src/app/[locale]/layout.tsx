@@ -7,12 +7,13 @@ const NAVIGATION_LINKS: INavigationLink[] = [
     {title: "Characters", link: '/'},
     {title: "Locations", link: '/locations'}
 ]
-const Layout = ({children}: { children: ReactNode }) => {
+const Layout = ({children, modal}: { children: ReactNode, modal: ReactNode }) => {
     return (
         <>
             <Header navigationLinks={NAVIGATION_LINKS}/>
             <main>
                 {children}
+                {modal}
             </main>
             <Footer/>
         </>
