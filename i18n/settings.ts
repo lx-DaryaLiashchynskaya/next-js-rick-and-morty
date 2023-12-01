@@ -4,7 +4,7 @@ export const fallbackLng = 'en'
 
 export const locales = [fallbackLng, 'fr'] as const;
 export type LocaleTypes = (typeof locales)[number];
-export const defaultNS = 'common';
+export const defaultNS = 'home';
 
 export function getOptions(lang = fallbackLng, ns = defaultNS): InitOptions {
     return {
